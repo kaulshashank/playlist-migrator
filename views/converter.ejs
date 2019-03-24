@@ -1,0 +1,113 @@
+<% include partials/header %>
+
+<section class="jumbotron text-center">
+    <% if(step === 2) {%>
+    <div class="row">
+        <div id="spotify_list">
+            <h4 style="margin-bottom: 20px"><strong><%= playlistName %></strong></h4>
+            <% songs.forEach(function(song){ %>
+            <div style="display: inline-block;" id="spotify_card" search_query="<%= song.search_text %>"
+                class="col-md-3">
+                <div class="card mb-4 shadow-sm">
+                    <img class="bd-placeholder-img card-img-top" width="200px" height="200px" src="<%= song.img %>"
+                        aria-label="Placeholder: Thumbnail">
+                    <title><%= song.name %></title>
+                    </svg>
+                    <div class="card-body">
+                        <h3 class="card-text"><%= song.name %></h3>
+                        <p class="card-text"><strong><%= song.artists %></strong> - <%= song.album %></p>
+                    </div>
+                </div>
+            </div>
+            <% }) %>
+        </div>
+        <div class="col-md-6 step_2">
+            <main role="main" class="youtube_main inner cover">
+                <h1 class="cover-heading">Help me a little!</h1>
+                <p class="lead">Click on the button and I'll search YouTube for the songs on the left. You'll need to
+                    choose the ones you want! </p>
+                <p class="lead">
+                    <button onclick="javascript:fetchPlaylists()" class="btn btn-lg btn-secondary">Let's do
+                        this!</button>
+                </p>
+            </main>
+        </div>
+        <div class="col-md-6 step_3" hidden>
+            <div class="">
+                <div class="list-group list-group-root well">
+                    <a href="#item-1" class="list-group-item" data-toggle="collapse">
+                        <i class="glyphicon glyphicon-chevron-right"></i>Item 1
+                    </a>
+                    <div class="list-group collapse" id="item-1">
+
+                        <a href="#item-1-1" class="list-group-item" data-toggle="collapse">
+                            <i class="glyphicon glyphicon-chevron-right"></i>Item 1.1
+                        </a>
+                        <div class="list-group collapse" id="item-1-1">
+                            <a href="#" class="list-group-item">Item 1.1.1</a>
+                            <a href="#" class="list-group-item">Item 1.1.2</a>
+                            <a href="#" class="list-group-item">Item 1.1.3</a>
+                        </div>
+
+                        <a href="#item-1-2" class="list-group-item" data-toggle="collapse">
+                            <i class="glyphicon glyphicon-chevron-right"></i>Item 1.2
+                        </a>
+                        <div class="list-group collapse" id="item-1-2">
+                            <a href="#" class="list-group-item">Item 1.2.1</a>
+                            <a href="#" class="list-group-item">Item 1.2.2</a>
+                            <a href="#" class="list-group-item">Item 1.2.3</a>
+                        </div>
+
+                        <a href="#item-1-3" class="list-group-item" data-toggle="collapse">
+                            <i class="glyphicon glyphicon-chevron-right"></i>Item 1.3
+                        </a>
+                        <div class="list-group collapse" id="item-1-3">
+                            <a href="#" class="list-group-item">Item 1.3.1</a>
+                            <a href="#" class="list-group-item">Item 1.3.2</a>
+                            <a href="#" class="list-group-item">Item 1.3.3</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <% } else { %>
+    <form action="/spotify/playlist" method="get">
+        <input style='margin-bottom: 30px;' value="" name="spotify_playlist_uri" placeholder="URI" />
+        <button class="btn btn-md btn-primary">
+            Fetch
+        </button>
+    </form>
+    <h2>Enter your spotify playlist URI above to fetch all songs to migrate </h2>
+    <% } %>
+</section>
+
+<script>
+    async function fetchPlaylists() {
+        var searches = [];
+
+        document.querySelectorAll('#spotify_card').forEach(function (element) {
+            searches.push(element.getAttribute('search_query'));
+        });
+
+        let response = await fetch('/youtube/search', {
+            method: 'POST',
+            mode: 'same-origin',
+            credentials: 'same-origin',
+            headers: new Headers({
+                "Content-Type": "application/json",
+            }),
+            body: new Blob([JSON.stringify({ searches }, null, 2)], { type: 'application/json' })
+        });
+
+        document.querySelector('.step_2').setAttribute('hidden', ' ');
+        document.querySelector('.step_3').removeAttribute('hidden');
+    }
+
+    document.querySelector('.list-group-item').addEventListener('click', function (event) {
+
+    });
+</script>
+
+<% include partials/footer %>

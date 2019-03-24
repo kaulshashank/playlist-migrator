@@ -1,0 +1,40 @@
+<% include partials/login-header %>
+
+<body class="text-center">
+    <div class="container">
+        <form class="form-signin" method="POST" action="/login">
+            <img class="mb-4" src="https://image.flaticon.com/icons/png/512/175/175683.png" alt="" width="72"
+                height="72">
+            <h1 class="h3 mb-3 font-weight-normal">Sign In</h1>
+            <div class="auth_input_field">
+                <label for="inputUsername" class="sr-only">Username</label>
+                <input type="text" id="inputUsername" class="form-control" placeholder="Username" name="username"
+                    required autofocus>
+
+            </div>
+            <div class="auth_input_field">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input name="password" type="password" id="inputPassword" class="form-control" placeholder="Password"
+                    required>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+                </div>
+                <div class="col-md-6">
+                    <a class="btn btn-lg btn-success btn-block"
+                        href = '/register'>Register</a>
+                </div>
+            </div>
+
+            <% if (message.length > 0) { %>
+                <div class="alert alert-danger"><%= message %></div>
+            <% } %>
+
+        </form>
+    </div>
+
+
+</body>
+
+<% include partials/footer %>

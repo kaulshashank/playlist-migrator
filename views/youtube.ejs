@@ -1,0 +1,31 @@
+<% include partials/header %>
+
+<section class="jumbotron text-center">
+    <% if(!ytConnected) {%>
+        <main role="main" class="inner cover">
+            <h1 class="cover-heading">Hey!</h1>
+            <p class="lead">You're going to have to give me permission to create and edit items on your YouTube account.
+                Dont worry, I won't bite! ;)</p>
+            <p class="lead">
+                <form action="/youtube" method="post">
+                    <button type="submit" class="btn btn-md btn-primary">
+                        Connect Youtube
+                    </button>
+                </form>
+            </p>
+        </main>
+    <% } else { %>
+        <main role="main" class="inner cover">
+            <h1 class="cover-heading">Hey!</h1>
+            <p class="lead">Looks like you've already hooked up your YouTube account!</p>
+            <p class="lead">
+                <a href="/converter" class="btn btn-md btn-primary">
+                    Start converting
+                </a>
+            </p>
+        </main>
+    <% } %>
+
+</section>
+
+<% include partials/footer %>
