@@ -78,20 +78,22 @@ body {
   color: #777;
 }
 
-#spotify_list {
+#list_container {
   overflow-y: scroll; 
   overflow-x: hidden; 
   height: 720px;
   position: relative;
   width: 50%; 
   margin: auto;
+  padding-top: 10px;
 }
 
-#spotify_card {
+#source_item_card {
+  display: inline-block;
   max-width: 30%;
 }
 
-#spotify_card:hover {
+#source_item_card:hover {
   transform: scale(1.05);
   transition-timing-function: ease-in;
   transition-duration: 0.2s;
@@ -105,4 +107,8 @@ body {
   position: absolute;
   top: 10px;
   left: 10px;
+}
+
+.migrate_button {
+  margin-top: 15px;
 }
