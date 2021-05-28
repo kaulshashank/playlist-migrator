@@ -22,12 +22,12 @@ module.exports = {
     //     ]
     // },
     "web": {
-        "client_id": "875130466230-p5u6oo49uerjhg9io1rh11v3dpopfa1u.apps.googleusercontent.com",
+        "client_id": "",
         "project_id": "playlist-migrator-237611",
         "auth_uri": "https://accounts.google.com/o/oauth2/auth",
         "token_uri": "https://oauth2.googleapis.com/token",
         "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-        "client_secret": "8lzD76qaF8JAMoRggPpDF35j",
+        "client_secret": "",
         "redirect_uri": "http://localhost:8080/youtube/success",
         "javascript_origins": [
             "http://localhost:8080"
